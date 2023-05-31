@@ -6,7 +6,6 @@ For online Python notebook environments the following packages are needed to be 
 
 ``` 
 !pip install nuscenes-devkit matplotlib==3.7 waymo-open-dataset-tf-2-11-0==1.5.2
-
 ```
 
 We also need to install ```torch-scatter``` package for training which we do like this for it to work on Colab.
