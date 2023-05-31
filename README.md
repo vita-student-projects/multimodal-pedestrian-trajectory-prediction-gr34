@@ -138,3 +138,11 @@ def plot_scene(scene_data):
     plot_roadlines(scene_data["road_network_segments"])
 ```
 
+**Model weights**
+- [Waymo](https://drive.google.com/file/d/1zpjXsaHCLJHZvthH_hPw3kEQkYwI81lW/view?usp=sharing) 
+- [nuScenes](https://drive.google.com/file/d/1u7teQC_hIoPqcF8BmgQjWSj3bkTc03h_/view?usp=sharing)
+
+**Contributions**
+- Yixuan focused on optimising Multipath++ model for pedestrians, trained it on Waymo dataset and integrated Waymo API to calculate the metrics 
+- Boris worked on converting nuScenes to Waymo format, trained Multipath++ model on nuScenes and calculated normalization parameters
+- Melike specialised in extracting ego vehicle data for nuScenes dataset, helped with training and documented our work
