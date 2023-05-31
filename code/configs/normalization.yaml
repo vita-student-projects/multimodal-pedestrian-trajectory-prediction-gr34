@@ -1,0 +1,19 @@
+dataset_config:
+  lstm_input_data: ["xy", "yaw", "speed", "width", "length", "valid"]
+  lstm_input_data_diff: ["xy", "yaw", "speed", "valid"]
+  mask_history: False
+history_timesteps: 11
+future_timesteps: 80
+agent_feature_count: 6
+agent_diff_feature_count: 4
+road_network_feature_count: 7
+feature_dimension_map:
+  target/history/lstm_data: 13
+  target/history/lstm_data_diff: 11
+  target/history/mcg_input_data: 24
+  other/history/lstm_data: 13
+  other/history/lstm_data_diff: 11
+  other/history/mcg_input_data: 24
+  road_network_embeddings: 27
+  target/future/xy: 2
+respect_validity: True

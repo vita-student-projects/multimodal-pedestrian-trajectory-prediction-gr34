@@ -1,0 +1,20 @@
+renderers:
+  - renderer_name: MultiPathPPRenderer
+    renderer_config:
+      segment_filtering:
+        policy: "within_radius"
+        segments_filtering_radius: 150
+      agent_filtering:
+        policy: "interesting"
+current_timestep_idx: 10 # 0...9 -> history, 10 -> current, 11...39 -> future
+layers_of_interest:
+  - road_segment
+  - road_block
+  - lane
+  - ped_crossing
+  - walkway
+  - stop_line
+  - carpark_area
+  - road_divider
+  - lane_divider
+map_expansion_radius: 150 # ideally (but not at all necessarily) should be equal to segments_filtering_radius
