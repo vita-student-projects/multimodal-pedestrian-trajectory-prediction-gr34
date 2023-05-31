@@ -62,7 +62,7 @@ for f in val_files:
 
 **Normalization**
 
-
+At this stage the training data is read and certain normalization coefficients are calculated and saved. The normalization coefficients scale the data to a common form, resolving disparicies among different feaures to prevent bias in prediction after the training process. The ```nuscenes_normalization.yaml``` config file specifies the features and their corresponding normalization procedures. The calculated normalization coefficients are saved in a .npy file for use in the training. Run the following commands for normalization:
 
 ```
 !python3 multipathpp/code/normalization.py \
