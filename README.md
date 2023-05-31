@@ -31,11 +31,10 @@ The prerendering script will convert the original data format into set of ```.np
    --output-path drive/MyDrive/multipathpp/prerendered_nuscenes \
    --config configs/nuscenes_prerender.yaml
 ```
-Rendering is a memory consuming process, therefore it uses multiprocessing to speed up the rendering. So, you may want to use ```n-shards > 1``` and running the script a few times using consecutive ```shard-id``` values
 
 **Dataset Splitting**
 
-The prerendered data is split into training and validation based on scene identifiers extracted from the filenames, as such this method assumes a certain ordering and formatting for scene identifiers of the filenames. Run the following commands to do so and to move the datasets to corresponding folders **train** and **val**:
+The prerendered data for nuScenes is split into training and validation based on scene identifiers extracted from the filenames, as such this method assumes a certain ordering and formatting for scene identifiers of the filenames. Run the following commands to do so and to move the datasets to corresponding folders **train** and **val**:
 
 ```
 import os
@@ -61,10 +60,10 @@ for f in val_files:
 At this stage the training data is read and certain normalization coefficients are calculated and saved. The normalization coefficients scale the data to a common form, resolving disparicies among different feaures to prevent bias in prediction after the training process. The ```nuscenes_normalization.yaml``` config file specifies the features and their corresponding normalization procedures. The calculated normalization coefficients are saved in a .npy file for use in the training. Run the following commands for normalization:
 
 ```
-!python3 multipathpp/code/normalization.py \
+!python3 normalization.py \
     --data-path drive/MyDrive/multipathpp/prerendered_nuscenes/train \
     --output-path drive/MyDrive/multipathpp/normalization/normalization_coefs_nuscenes.npy \
-    --config multipathpp/code/configs/nuscenes_normalization.yaml
+    --config configs/nuscenes_normalization.yaml
 ```
 
 
@@ -74,11 +73,11 @@ The ```train.py``` file runs the training process which uses the configuration f
 To train the model please run the following commands:
 
 ```
-!python3 multipathpp/code/train.py \
+!python3 train.py \
     --train-data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/train \
     --val-data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/val \
     --norm-coeffs drive/MyDrive/multipathpp/normalization/normalization_coefs_nuscenes.npy \
-    --config multipathpp/code/configs/nuscenes_final_RoP_Cov_Single.yaml \
+    --config configs/nuscenes_final_RoP_Cov_Single.yaml \
     --epoch 40
 ```
 
