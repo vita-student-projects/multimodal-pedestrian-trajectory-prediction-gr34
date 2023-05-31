@@ -25,7 +25,7 @@ First we need to prepare data for training. Data preprocessing is done through r
 The prerendering script will convert the original data format into set of ```.npz``` files each containing the data for a single target agent. To prerender data for nuScenes from ```code``` folder run (assuming your data is stored on google drive)
 
 ```
-!python3 prerender/prerender_nuscenes.py \
+python3 prerender/prerender_nuscenes.py \
    --data-version v1.0-mini \
    --data-path drive/MyDrive/multipathpp/nuscenes/v1.0-mini \
    --output-path drive/MyDrive/multipathpp/prerendered_nuscenes \
@@ -33,6 +33,8 @@ The prerendering script will convert the original data format into set of ```.np
 ```
 
 **Dataset Splitting**
+
+For Waymo datasets are already split into training and validation before rendering.
 
 The prerendered data for nuScenes is split into training and validation based on scene identifiers extracted from the filenames, as such this method assumes a certain ordering and formatting for scene identifiers of the filenames. Run the following commands to do so and to move the datasets to corresponding folders **train** and **val**:
 
@@ -60,7 +62,7 @@ for f in val_files:
 At this stage the training data is read and certain normalization coefficients are calculated and saved. The normalization coefficients scale the data to a common form, resolving disparicies among different feaures to prevent bias in prediction after the training process. The ```nuscenes_normalization.yaml``` config file specifies the features and their corresponding normalization procedures. The calculated normalization coefficients are saved in a .npy file for use in the training. Run the following commands for normalization:
 
 ```
-!python3 normalization.py \
+python3 normalization.py \
     --data-path drive/MyDrive/multipathpp/prerendered_nuscenes/train \
     --output-path drive/MyDrive/multipathpp/normalization/normalization_coefs_nuscenes.npy \
     --config configs/nuscenes_normalization.yaml
@@ -73,7 +75,7 @@ The ```train.py``` file runs the training process which uses the configuration f
 To train the model please run the following commands:
 
 ```
-!python3 train.py \
+python3 train.py \
     --train-data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/train \
     --val-data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/val \
     --norm-coeffs drive/MyDrive/multipathpp/normalization/normalization_coefs_nuscenes.npy \
@@ -85,7 +87,7 @@ To train the model please run the following commands:
 To receive the metrics results (and dump them to ```output.txt``` for nuScenes you need to run
 
 ```
-!python3 inference.py \
+python3 inference.py \
     --data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/val \
     --norm-coeffs drive/MyDrive/multipathpp/normalization/normalization_coefs_nuscenes.npy \
     --checkpoint drive/MyDrive/multipathpp/best_single_model.pth \
@@ -96,7 +98,8 @@ To receive the metrics results (and dump them to ```output.txt``` for nuScenes y
 
 To be able to better grasp the performance of the trained model, it is beneficial to visualize the ground truth and predictions. Run this script to get ```trajectories.png``` file with trajectories for nuScenes for the agent number 60
 
-```!python3 pred_visualisation.py \
+```
+python3 pred_visualisation.py \
     --data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/val \
     --norm-coeffs drive/MyDrive/multipathpp/normalization/normalization_coefs_nuscenes.npy \
     --checkpoint drive/MyDrive/multipathpp/best_single_model.pth \
