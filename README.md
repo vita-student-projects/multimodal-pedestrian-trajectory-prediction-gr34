@@ -20,25 +20,16 @@ import torch
 ```
 
 
-Clone the repository ```waymo-motion-prediction-challenge-2022-multipath-plus-plus``` and switch to the specified branch. To be able to import python modules, add the ```code``` directory to the system path. Commands to be run are as follows:
-
-```
-!git clone https://github.com/Alvorecer721/waymo-motion-prediction-challenge-2022-multipath-plus-plus multipathpp
-
-import sys
-sys.path.insert(0, '/content/multipathpp/code')
-```
-**Prerendering**
-
 First we need to prepare data for training. Data preprocessing is done through rendering objects called visualizers created from a configuration file. The ```MultiPathPPRenderer``` class, which is essentially a visualizer, is utilized to perform prerendering tasks. These tasks involve selection of valid agents and road networks, preperation of road network information such as extracting coordinates of nodes, their types and IDs, transformation of data into agent centric coordinate system, filtering closest road elements, generating embeddings for road segments and trajectory classification of agents basewd on motion predictions. 
 
-The prerendering script will convert the original data format into set of ```.npz``` files each containing the data for a single target agent. From ```code``` folder run
+The prerendering script will convert the original data format into set of ```.npz``` files each containing the data for a single target agent. To prerender data for nuScenes from ```code``` folder run (assuming your data is stored on google drive)
+
 ```
-!python3 multipathpp/code/prerender/prerender_nuscenes.py \
+!python3 prerender/prerender_nuscenes.py \
    --data-version v1.0-mini \
    --data-path drive/MyDrive/multipathpp/nuscenes/v1.0-mini \
    --output-path drive/MyDrive/multipathpp/prerendered_nuscenes \
-   --config multipathpp/code/configs/nuscenes_prerender.yaml
+   --config configs/nuscenes_prerender.yaml
 ```
 Rendering is a memory consuming process, therefore it uses multiprocessing to speed up the rendering. So, you may want to use ```n-shards > 1``` and running the script a few times using consecutive ```shard-id``` values
 
