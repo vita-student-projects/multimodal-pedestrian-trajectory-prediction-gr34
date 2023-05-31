@@ -24,7 +24,6 @@ Clone the repository ```waymo-motion-prediction-challenge-2022-multipath-plus-pl
 
 ```
 !git clone https://github.com/Alvorecer721/waymo-motion-prediction-challenge-2022-multipath-plus-plus multipathpp
-!cd multipathpp && git checkout boris/nuscenes-configs
 
 import sys
 sys.path.insert(0, '/content/multipathpp/code')
