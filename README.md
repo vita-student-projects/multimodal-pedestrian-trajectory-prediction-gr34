@@ -2,10 +2,16 @@
 
 **Required packages**
 
-For online Python notebook environments the following packages are needed to be installed. Among which the ```nuscenes-devkit``` python library will provide tools to work with the NuScenes dataset. 
+For online Python notebook environments the following packages are needed to be installed. Among which the ```nuscenes-devkit``` and ```waymo-open-dataset``` python libraries that provide tools to work with the NuScenes and Waymo datasets. 
 
 ``` 
-!pip install nuscenes-devkit matplotlib==3.7
+!pip install nuscenes-devkit matplotlib==3.7 waymo-open-dataset-tf-2-11-0==1.5.2
+
+```
+
+We also need to install ```torch-scatter``` package for training which we do like this for it to work on Colab.
+
+```
 import torch
 !pip uninstall torch-scatter torch-sparse torch-geometric torch-cluster  --y
 !pip install torch-scatter -f https://data.pyg.org/whl/torch-{torch.__version__}.html
@@ -13,6 +19,7 @@ import torch
 !pip install torch-cluster -f https://data.pyg.org/whl/torch-{torch.__version__}.html
 !pip install git+https://github.com/pyg-team/pytorch_geometric.git
 ```
+
 
 Clone the repository ```waymo-motion-prediction-challenge-2022-multipath-plus-plus``` and switch to the specified branch. To be able to import python modules, add the ```code``` directory to the system path. Commands to be run are as follows:
 
