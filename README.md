@@ -71,6 +71,12 @@ At this stage the training data is read and certain normalization coefficients a
     --config multipathpp/code/configs/nuscenes_normalization.yaml
 ```
 
+
+**Training**
+
+The ```train.py``` file runs the training process which uses the configuration file ```nuscenes_final_RoP_Cov_Single.yaml```. The validation data ensures the 
+To train the model please run the following commands:
+
 ```
 !python3 multipathpp/code/train.py \
     --train-data-folder drive/MyDrive/multipathpp/prerendered_nuscenes/train \
@@ -79,6 +85,10 @@ At this stage the training data is read and certain normalization coefficients a
     --config multipathpp/code/configs/nuscenes_final_RoP_Cov_Single.yaml \
     --epoch 40
 ```
+
+**Scene Data Visualization**
+
+To be able to better grasp the performance of the trained model, it is beneficial to visualize the ground truth and predictions. Following helper functions are used for this purpose where the ```plot_arrowbox``` visualizes an arrow box to represent the vehicle, ```plot_roadlines``` plots the road segments as 2D map and ```plot_scene``` is used to visualize entire scene, combining the previously mentioned functions. 
 
 ```
 import matplotlib.pyplot as plt
@@ -126,10 +136,5 @@ def plot_scene(scene_data):
                           scene_data["target/history/width"][0][-1].item(), color)
 
     plot_roadlines(scene_data["road_network_segments"])
-```
-
-Once we have our data prepared we can run the training.
-```
-python3 train.py configs/final_RoP_Cov_Single.yaml
 ```
 
